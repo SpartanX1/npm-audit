@@ -1,0 +1,73 @@
+{
+	"name": "npm-audit",
+	"displayName": "NPM Audit",
+	"publisher": "AbhijoyBasak",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/SpartanX1/npm-audit"
+	},
+	"bugs": {
+		"url": "https://github.com/SpartanX1/npm-audit/issues",
+		"email": "basak.abhijoy@gmail.com"
+	  },
+	"icon": "images/icon.png",
+	"description": "View npm audit security report in visual format",
+	"keywords": ["npm", "audit", "report", "package manager", "security"],
+	"version": "0.0.3",
+	"engines": {
+		"vscode": "^1.43.0"
+	},
+	"categories": [
+		"Other"
+	],
+	"activationEvents": [
+		"onCommand:extension.onAudit"
+	],
+	"main": "./out/extension.js",
+	"contributes": {
+		"commands": [
+			{
+				"command": "extension.onAudit",
+				"title": "NPM Audit",
+				"enablement": "resourceFilename == package-lock.json || resourceFilename == npm-shrinkwrap.json"
+			}
+		],
+		"menus": {
+			"explorer/context": [
+				{
+					"command": "extension.onAudit",
+					"group": "2_workspace"
+				}
+			]
+		}
+	},
+	"scripts": {
+		"vscode:prepublish": "npm run compile",
+		"compile": "rm -rf ./out && tsc -p ./ && npm run copy",
+		"copy": "cp -r src/assets ./out",
+		"lint": "eslint src --ext ts",
+		"watch": "tsc -watch -p ./",
+		"pretest": "npm run compile && npm run lint",
+		"test": "node ./out/test/runTest.js"
+	},
+	"devDependencies": {
+		"@types/fs-extra": "^8.1.0",
+		"@types/glob": "^7.1.1",
+		"@types/mocha": "^7.0.1",
+		"@types/mustache": "^4.0.1",
+		"@types/node": "^12.11.7",
+		"@types/vscode": "^1.43.0",
+		"@typescript-eslint/eslint-plugin": "^2.18.0",
+		"@typescript-eslint/parser": "^2.18.0",
+		"chai": "^4.2.0",
+		"eslint": "^6.8.0",
+		"glob": "^7.1.6",
+		"mocha": "^7.0.1",
+		"typescript": "^3.7.5",
+		"vscode-test": "^1.3.0"
+	},
+	"dependencies": {
+		"fs-extra": "^9.0.0",
+		"mustache": "^4.0.1"
+	}
+}
